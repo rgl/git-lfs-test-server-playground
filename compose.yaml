@@ -1,0 +1,15 @@
+# see https://github.com/compose-spec/compose-spec/blob/master/spec.md
+# see https://github.com/opencontainers/image-spec/blob/master/annotations.md
+services:
+  git-lfs-test-server:
+    build: git-lfs-test-server
+    environment:
+      - LFS_ADMINUSER=admin
+      - LFS_ADMINPASS=admin
+    ports:
+      # the management page.
+      # access at http://localhost:8080/mgmt
+      - 8080:8080
+    volumes:
+      - .:/host:ro
+    restart: on-failure

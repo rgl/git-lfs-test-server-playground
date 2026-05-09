@@ -1,0 +1,14 @@
+name: test
+on:
+  - push
+  - workflow_dispatch
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - name: Build
+        run: docker compose up --build --detach
+      - name: Test
+        run: docker compose exec git-lfs-test-server bash /host/test.sh
